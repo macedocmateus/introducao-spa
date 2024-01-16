@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SPA</title>
+    </head>
+    <body>
+        <nav>
+            <a href="/" onclick="route()">Home</a>
+            <a href="/about" onclick="route()">Sobre</a>
+            <a href="/contato" onclick="route()">Contanto</a>
+            <a href="/404" onclick="route()">404</a>
+        </nav>
+
+        <div id="app"></div>
+
+        <script>
+            const routes = {
+                '/about': '/pages/about.html',
+                '/contact': '/pages/contact.html',
+                '/': '/pages/home.html',
+                404: '/pages/404.html',
+            };
+
+            console.log(routes['/about']);
+
+            function route(event) {
+                event = event || window.event;
+                event.preventDefault();
+
+                window.history.pushState({}, '', event.target.href);
+
+                handle();
+            }
+
+            function handle() {
+                // const pathname = window.location.pathname; // forma não desestruturada
+                // const { pathname } = window.location; // forma desestruturada
+
+                const { pathname, href, host, port } = window.location; // desestruturação variada com funções vindas do .location
+                console.log(pathname);
+            }
+        </script>
+    </body>
+</html>
