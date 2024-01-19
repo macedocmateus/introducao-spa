@@ -4,47 +4,16 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>SPA</title>
+        <script type="module" src="./source/index.js"></script>
     </head>
     <body>
         <nav>
-            <a href="/home" onclick="route()">Home</a>
+            <a href="/" onclick="route()">Home</a>
             <a href="/about" onclick="route()">Sobre</a>
             <a href="/contact" onclick="route()">Contato</a>
             <a href="/404" onclick="route()">404</a>
         </nav>
 
         <div id="app"></div>
-
-        <script>
-            const routes = {
-                '/home': '/pages/home.html',
-                '/about': '/pages/about.html',
-                '/contact': '/pages/contact.html',
-                404: '/pages/404.html',
-            };
-
-            function route(event) {
-                event = event || window.event;
-                event.preventDefault();
-
-                window.history.pushState({}, '', event.target.href);
-
-                handle();
-            }
-
-            function handle() {
-                // const pathname = window.location.pathname; // forma não desestruturada
-                // const { pathname } = window.location; // forma desestruturada
-
-                const { pathname } = window.location; // desestruturação variada com funções vindas do .location
-                const route = routes[pathname] || routes[404];
-                console.log('antes do fetch');
-                fetch(route)
-                    .then((data) => data.text())
-                    .then((html) => console.log(html));
-
-                console.log(route);
-            }
-        </script>
     </body>
 </html>
