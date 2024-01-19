@@ -7,9 +7,9 @@
     </head>
     <body>
         <nav>
-            <a href="/" onclick="route()">Home</a>
+            <a href="/home" onclick="route()">Home</a>
             <a href="/about" onclick="route()">Sobre</a>
-            <a href="/contato" onclick="route()">Contanto</a>
+            <a href="/contact" onclick="route()">Contato</a>
             <a href="/404" onclick="route()">404</a>
         </nav>
 
@@ -17,13 +17,11 @@
 
         <script>
             const routes = {
+                '/home': '/pages/home.html',
                 '/about': '/pages/about.html',
                 '/contact': '/pages/contact.html',
-                '/': '/pages/home.html',
                 404: '/pages/404.html',
             };
-
-            console.log(routes['/about']);
 
             function route(event) {
                 event = event || window.event;
@@ -38,8 +36,14 @@
                 // const pathname = window.location.pathname; // forma não desestruturada
                 // const { pathname } = window.location; // forma desestruturada
 
-                const { pathname, href, host, port } = window.location; // desestruturação variada com funções vindas do .location
-                console.log(pathname);
+                const { pathname } = window.location; // desestruturação variada com funções vindas do .location
+                const route = routes[pathname] || routes[404];
+                console.log('antes do fetch');
+                fetch(route)
+                    .then((data) => data.text())
+                    .then((html) => console.log(html));
+
+                console.log(route);
             }
         </script>
     </body>
